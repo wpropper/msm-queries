@@ -1,0 +1,42 @@
+<h1>List of all actors</h1>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Dob</th>
+      <th></th> <!-- Empty header for the Show details link -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @list_of_actors.each do |a_actor| %>
+      <tr>
+        <td><%= a_actor.id %></td>
+
+        <td>
+          <% if a_actor.image.present? %>
+            <img src="<%= a_actor.image %>" alt="<%= a_actor.name %>" width="200">
+          <% else %>
+            No image
+          <% end %>
+        </td>
+
+        <td><%= a_actor.name %></td>
+
+<td>
+  <% if a_actor.dob.present? %>
+    <%= a_actor.dob.strftime("%Y-%m-%d") %>
+  <% else %>
+    <span style="color: gray;">Unknown</span>
+  <% end %>
+</td>
+
+        <td>
+          <%= link_to "Show details", "/actors/#{a_actor.id}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

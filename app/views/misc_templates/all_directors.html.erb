@@ -1,0 +1,47 @@
+<h1>List of all directors</h1>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Dob</th>
+      <th></th> <!-- Empty header for the Show details link -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @list_of_directors.order(:dob => :desc).each do |a_director| %>
+      <tr>
+        <!-- ID -->
+        <td><%= a_director.id %></td>
+
+        <!-- Image -->
+        <td>
+          <% if a_director.image.present? %>
+            <img src="<%= a_director.image %>" alt="<%= a_director.name %>" width="200">
+          <% else %>
+            No image
+          <% end %>
+        </td>
+
+        <!-- Name -->
+        <td><%= a_director.name %></td>
+
+        <!-- DOB -->
+<td>
+  <% if a_director.dob.present? %>
+    <%= a_director.dob.strftime("%Y-%m-%d") %>
+  <% else %>
+    <span style="color: gray;">Unknown</span>
+  <% end %>
+</td>
+
+        <!-- Show Details Link -->
+        <td>
+          <%= link_to "Show details", "/directors/#{a_director.id}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
